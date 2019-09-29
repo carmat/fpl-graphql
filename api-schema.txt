@@ -1,0 +1,103 @@
+https://fantasy.premierleague.com/api/bootstrap-static/
+    elements // players
+        event_points (Number)
+        web_name (String)
+    events // gameweeks
+        average_entry_score (Number)
+        name (String)
+        is_current (Boolean)
+    game_settings
+        league_points_h2h_win (Number)
+        league_points_h2h_draw (Number)
+        league_points_h2h_lose (Number)
+    phases
+        name (String)
+        start_event (Number)
+        end_event (Number)
+    teams
+        name (String)
+        short_name (String)
+
+https://fantasy.premierleague.com/api/event-status/
+    leagues (String) // 'updated' || 'updating' || null
+    status
+        bonus_added (Boolean)
+        date (yyyy-mm-dd)
+        event (Number)
+
+https://fantasy.premierleague.com/api/entry/{entry_id}/
+    name (String)
+    player_first_name (String)
+    player_last_name (String)
+    started_event (Number)
+    current_event (Number)
+    summary_event_points (Number)
+    summary_overall_points (Number)
+    leagues
+        classic
+        h2h
+            name (String)
+            start_event (Number)
+            entry_rank (Number)
+            entry_last_rank (Number)
+
+https://fantasy.premierleague.com/api/entry/{entry_id}/history/
+    chips
+        name (String)
+        time (Time)
+        event (Number)
+    current // gameweeks
+        event (Number)
+        event_transfers (Number)
+        event_transfers_cost (Number)
+        points (Number)
+        total_points (Number)
+
+https://fantasy.premierleague.com/api/entry/{entry_id}/event/{gw_id}/picks/
+    active_chip (String)
+    automatic_subs [...elements]
+    picks [...elements]
+        element (Number)
+        captain (Boolean)
+        vice_captain (Boolean)
+        multiplier (Number)
+        position (Number)
+
+https://fantasy.premierleague.com/api/leagues-classic/{league_id}/standings/ (AUTHENTICATION REQUIRED)
+    ?page_new_entries=1&page_standings=1&phase=1
+        league
+            name (String)
+            start_event (Number)
+        new_entries [...entries]
+        standings
+            results
+                entry_name (String)
+                player_name (String)
+                rank (Number)
+                last_rank (Number)
+                event_total (Number)
+                total (Number)
+
+https://fantasy.premierleague.com/api/leagues-h2h/{league_id}/standings/
+    ?page_new_entries=1&page_standings=1
+        league
+            name (String)
+            start_event (Number)
+        standings
+            results
+                entry_name (String)
+                player_name (String)
+                rank (Number)
+                last_rank (Number)
+                matches_played (Number)
+                matches_won (Number)
+                matches_drawn (Number)
+                matches_lost (Number)
+                event_total (Number)
+                points_for (Number)
+                total (Number)
+
+https://fantasy.premierleague.com/api/leagues-h2h-matches/league/{league_id}/
+    ?page=1&event={current_gw}
+    ?page=1&event={next_gw}
+    ?page=1&entry={entry_id} (AUTHENTICATION REQUIRED)
