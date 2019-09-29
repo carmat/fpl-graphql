@@ -1,0 +1,12 @@
+{
+  leagues(entry_id: $entry_id) {
+    h2h {
+      id
+      name
+    }
+    classic {
+      id
+      name
+    }
+  }
+}

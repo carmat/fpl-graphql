@@ -120,6 +120,23 @@ const resolvers = {
       return await data.json();
     },
 
+        leagues: async (_, args) => {
+            const { entry_id } = args;
+            let { type } = args;
+            type = type || 'x'; // 's'
+
+            const { leagues } = await fetch(`${baseURI}/entry/${entry_id}/`)
+                .then(res => res.json())
+                .then(({ leagues }) => {
+                    const classic = leagues.classic.filter(({ league_type }) => league_type === type);
+                    const h2h = leagues.h2h.filter(({ league_type }) => league_type === type);
+
+                    return { leagues: { classic, h2h } };
+                });
+
+            return leagues;
+        },
+
     live: async (_, args) => {
       data = await fetch(`${baseURI}/event/${args.event}/live/`);
       json = await data.json();

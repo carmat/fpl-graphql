@@ -6,6 +6,7 @@ type Query {
   player(id: ID, name: String): Player!
   entry(id: ID!): Entry!
   entryHistory(id: ID!): EntryHistory
+  leagues(entry_id: ID!, type: String): Leagues!
   live(event: Int!, id: ID!): Live!
   picks(entry: Int!, event: Int!): Picks!
   playerSummary(id: ID!): PlayerSummary
@@ -165,6 +166,19 @@ type Entry {
 
 type EntryHistory {
   current: [EventHistory]
+}
+
+type LeagueMeta {
+  id: ID!
+  name: String!
+  league_type: String!
+  scoring: String!
+  start_event: Int!
+}
+
+type Leagues {
+  classic: [LeagueMeta!]
+  h2h: [LeagueMeta!]
 }
 
 type EventHistory {
